@@ -60,4 +60,21 @@ class VillageTest extends TestCase
 
         $this->assertEquals('ACEH', $village->province_name);
     }
+
+    /** @test */
+    public function a_village_can_store_meta_column()
+    {
+        $this->seed('Laravolt\Indonesia\Seeds\VillagesSeeder');
+        $village = Village::first();
+        $this->assertNull($village->meta);
+
+        $meta = [
+            'luas_wilayah' => 200.2,
+            'jumlah_penduduk' => 30942
+        ];
+
+        $village->update(['meta' => json_encode($meta)]);
+
+        $this->assertJsonStringEqualsJsonString($village->meta, json_encode($meta));
+    }
 }

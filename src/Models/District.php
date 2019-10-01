@@ -6,6 +6,8 @@ class District extends Model
 {
 	protected $table = 'districts';
 
+    protected $fillable = ['meta'];
+
     protected $casts = [
         'meta' => 'array',
     ];

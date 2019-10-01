@@ -6,6 +6,8 @@ class Province extends Model
 {
     protected $table = 'provinces';
 
+    protected $fillable = ['meta'];
+
     protected $casts = [
         'meta' => 'array',
     ];

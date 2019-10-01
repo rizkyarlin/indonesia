@@ -61,4 +61,22 @@ class DistrictTest extends TestCase
 
         $this->assertEquals('ACEH', $district->province_name);
     }
+
+    /** @test */
+    public function a_district_can_store_meta_column()
+    {
+        $this->seed('Laravolt\Indonesia\Seeds\DistrictsSeeder');
+        $district = District::first();
+        $this->assertNull($district->meta);
+
+        $meta = [
+            'kode_pos' => 90222,
+            'luas_wilayah' => 200.2,
+            'jumlah_penduduk' => 30942
+        ];
+
+        $district->update(['meta' => json_encode($meta)]);
+
+        $this->assertJsonStringEqualsJsonString($district->meta, json_encode($meta));
+    }
 }

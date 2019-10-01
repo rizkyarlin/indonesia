@@ -6,6 +6,8 @@ class Village extends Model
 {
 	protected $table = 'villages';
 
+    protected $fillable = ['meta'];
+
     protected $casts = [
         'meta' => 'array',
     ];

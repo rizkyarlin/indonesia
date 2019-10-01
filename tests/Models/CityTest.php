@@ -72,4 +72,22 @@ class CityTest extends TestCase
 
         $this->assertNull($city->logo_path);
     }
+
+    /** @test */
+    public function a_city_can_store_meta_column()
+    {
+        $this->seed('Laravolt\Indonesia\Seeds\CitiesSeeder');
+        $city = City::first();
+        $this->assertNull($city->meta);
+
+        $meta = [
+            'luas_wilayah' => 200.2,
+            'jumlah_penduduk' => 30942
+        ];
+
+        $city->update(['meta' => json_encode($meta)]);
+
+        $this->assertJsonStringEqualsJsonString($city->meta, json_encode($meta));
+    }
+
 }
